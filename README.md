@@ -1,57 +1,25 @@
-# 🔐 KeyCrypt: Encrypted C++ Password Manager
+# KeyCrypt
 
-**KeyCrypt** is a simple password manager built in C++ using the Crypto++ library. It securely stores passwords using AES encryption in CBC mode, protecting sensitive credentials like website logins.  
+A simple command-line password manager in C++ using Crypto++ for AES-256 encryption (CBC mode).
 
-## 📦 Features
+## Features
 
-- AES encryption (CBC mode) using the Crypto++ library
-- Account system (username and password)
-- Password file storage with per-entry encryption
-- Secure IV and key generation
-- Console-based UI for saving and retrieving passwords
+- AES-256 encryption with random key and IV
+- Salted encryption for user credentials and stored passwords
+- User login with password and security question fallback
+- Add and view encrypted passwords stored in a file
+- Persistent keys and data storage
 
----
+## Usage
 
-## ⚙️ How It Works
+1. On first run, create your account with username, password, and security question.
+2. Login with your credentials or answer your security question after 3 failed attempts.
+3. Use the menu to add new passwords or view saved ones.
 
-- On first run, `KeyCrypt` will:
-  - Ask the user to create a username/password
-  - Generate a key and IV (saved to `key.key` and `iv.key`)
-  - Store encrypted login credentials in `account.key`
-- On subsequent runs:
-  - It checks for existing keys and credentials
-  - Authenticates the user by decrypting and verifying input
-- After login:
-  - Users can store new passwords (website + encrypted password)
-  - Or read existing saved passwords
+## Building
 
----
+Requires Crypto++ installed.
 
-## 🗂️ File Structure
-
-| File Name       | Purpose                                |
-|----------------|----------------------------------------|
-| `main.cpp`     | Main logic and UI loop                 |
-| `account.key`  | Stores encrypted username & password   |
-| `passwords.key`| Stores encrypted website passwords     |
-| `key.key`      | AES encryption key                     |
-| `iv.key`       | AES initialization vector              |
-| `information.txt` | Stores user's name                  |
-
----
-
-## 🛠️ Dependencies
-
-- **Crypto++ Library**
-  - Ensure Crypto++ is installed:
-    - On Linux: `sudo apt install libcrypto++-dev libcrypto++-doc libcrypto++-utils`
-    - On macOS (with Homebrew): `brew install cryptopp`
-
----
-
-## 🚀 Compilation
-
-Use `g++` or any C++17+ compatible compiler with Crypto++:
-
+Compile with:
 ```bash
-g++ main.cpp -o keycrypt -lcryptopp
+g++ -std=c++17 main.cpp -lcryptopp -pthread -o keycrypt
